@@ -9,9 +9,12 @@ class Form extends Component {
 				title: "Firstname",
 				type: "text",
 				value: "",
-				valid: false,
-				touched: false,
-				placeholder: "Enter your firstname"
+				placeholder: "Enter your firstname",
+				validation: {
+					required: true,
+					valid: false,
+					touched: false
+				}
 			}
 		},
 		formValidation: {
@@ -20,22 +23,54 @@ class Form extends Component {
 		}
 	};
 
+	inputValidation = (name, newValue) => {
+		const { validation } = this.state.form[name];
+		let out = true;
+
+		if (validation.required && newValue.length === 0) {
+			console.log("here");
+			out = false;
+		}
+
+		return out;
+	};
+
+	checkFormValidation = (name, status) => {
+		return Object.keys(this.state.form).reduce((a, k) => {
+			let inputValidation = this.state.form[k].validation.valid;
+			if (k === name) {
+				inputValidation = status;
+			}
+			return (a = a && inputValidation);
+		}, true);
+	};
+
 	onChangeHandler = name => e => {
 		const newValue = e.target.value;
+		const inputValidationStatus = this.inputValidation(name, newValue);
+		const checkFormValidation = this.checkFormValidation(name, inputValidationStatus);
 
-		// TODO: check validation champs
-		// TODO: check validation générale
 		this.setState(prevState => {
 			return {
 				...prevState,
-				form: { ...prevState.form, [name]: { ...prevState.form[name], value: newValue } }
+				form: {
+					...prevState.form,
+					[name]: {
+						...prevState.form[name],
+						value: newValue,
+						validation: {
+							...prevState.form[name].validation,
+							touched: true,
+							valid: inputValidationStatus
+						}
+					}
+				}
 			};
 		});
 	};
 
 	render() {
 		const { form } = this.state;
-		console.log(form);
 		return (
 			<div>
 				<h1>Form</h1>
