@@ -19,7 +19,6 @@ class Form extends Component {
 			}
 		},
 		formValidation: {
-			touched: false,
 			valid: false
 		}
 	};
@@ -74,13 +73,25 @@ class Form extends Component {
 		});
 	};
 
+	generateInputs = () => {
+		return Object.keys(this.state.form).map(key => (
+			<Input
+				data={this.state.form[key]}
+				key={key}
+				onChangeHandler={this.onChangeHandler(this.state.form[key].name)}
+			/>
+		));
+	};
+
 	render() {
-		const { form } = this.state;
 		const validForm = this.state.formValidation.valid;
+		const inputs = this.generateInputs();
+		// <Input data={form.firstname} onChangeHandler={this.onChangeHandler(form.firstname.name)} />
+
 		return (
 			<div>
 				<h1>Form</h1>
-				<Input data={form.firstname} onChangeHandler={this.onChangeHandler(form.firstname.name)} />
+				{inputs}
 				<Submitbtn validForm={validForm} />
 			</div>
 		);

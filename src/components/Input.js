@@ -18,6 +18,7 @@ const Input = props => {
 				type={props.data.type}
 				name={props.data.title}
 				value={props.data.value}
+				placeholder={props.data.placeholder}
 				onChange={props.onChangeHandler}
 			/>
 		</div>

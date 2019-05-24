@@ -6,9 +6,10 @@
 	color: red;
 }
 
-.valid {
+.valid input {
 	border: solid 1px green;
 }
-.notValid {
+
+.notValid input {
 	border: solid 1px red;
 }
