@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Input from "../components/Input";
+import Submitbtn from "../components/Submitbtn";
 
 class Form extends Component {
 	state = {
@@ -64,6 +65,10 @@ class Form extends Component {
 							valid: inputValidationStatus
 						}
 					}
+				},
+				formValidation: {
+					...prevState.formValidation,
+					valid: checkFormValidation
 				}
 			};
 		});
@@ -71,10 +76,12 @@ class Form extends Component {
 
 	render() {
 		const { form } = this.state;
+		const validForm = this.state.formValidation.valid;
 		return (
 			<div>
 				<h1>Form</h1>
 				<Input data={form.firstname} onChangeHandler={this.onChangeHandler(form.firstname.name)} />
+				<Submitbtn validForm={validForm} />
 			</div>
 		);
 	}
