@@ -7,10 +7,82 @@ class Form extends Component {
 		form: {
 			firstname: {
 				name: "firstname",
-				title: "Firstname",
+				title: "First name",
 				type: "text",
 				value: "",
-				placeholder: "Enter your firstname",
+				placeholder: "Enter your first name",
+				validation: {
+					required: true,
+					valid: false,
+					touched: false
+				}
+			},
+			lastname: {
+				name: "lastname",
+				title: "Last name",
+				type: "text",
+				value: "",
+				placeholder: "Enter your last name",
+				validation: {
+					required: true,
+					valid: false,
+					touched: false
+				}
+			},
+			phone: {
+				name: "phone",
+				title: "Phone",
+				type: "text",
+				value: "",
+				placeholder: "Enter your phone number",
+				validation: {
+					required: true,
+					valid: false,
+					touched: false
+				}
+			},
+			email: {
+				name: "email",
+				title: "Email",
+				type: "email",
+				value: "",
+				placeholder: "Enter your email address",
+				validation: {
+					required: true,
+					valid: false,
+					touched: false
+				}
+			},
+			company: {
+				name: "company",
+				title: "Company",
+				type: "company",
+				value: "",
+				placeholder: "Enter your company",
+				validation: {
+					required: true,
+					valid: false,
+					touched: false
+				}
+			},
+			country: {
+				name: "country",
+				title: "Country",
+				type: "country",
+				value: "",
+				placeholder: "Select your country",
+				validation: {
+					required: true,
+					valid: false,
+					touched: false
+				}
+			},
+			message: {
+				name: "message",
+				title: "Message",
+				type: "textarea",
+				value: "",
+				placeholder: "",
 				validation: {
 					required: true,
 					valid: false,

@@ -8,12 +8,11 @@ const Input = props => {
 			: "notValid"
 		: null;
 
-	return (
-		<div className={["item", props.data.title, valid].join(" ")}>
-			<label htmlFor={props.data.title}>
-				{props.data.title}
-				{required}:{" "}
-			</label>
+	let input;
+	if (props.data.type === "textarea") {
+		input = <textarea name={props.data.title} onChange={props.onChangeHandler} />;
+	} else {
+		input = (
 			<input
 				type={props.data.type}
 				name={props.data.title}
@@ -21,6 +20,16 @@ const Input = props => {
 				placeholder={props.data.placeholder}
 				onChange={props.onChangeHandler}
 			/>
+		);
+	}
+
+	return (
+		<div className={["item", props.data.title, valid].join(" ")}>
+			<label htmlFor={props.data.title}>
+				{props.data.title}
+				{required}:{" "}
+			</label>
+			{input}
 		</div>
 	);
 };
