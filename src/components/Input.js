@@ -10,7 +10,14 @@ const Input = props => {
 
 	let input;
 	if (props.data.type === "textarea") {
-		input = <textarea name={props.data.title} onChange={props.onChangeHandler} />;
+		input = (
+			<div>
+				<textarea name={props.data.title} onChange={props.onChangeHandler} />
+				<span className="counter">
+					{props.data.validation.counter}/{props.data.validation.counterMax}
+				</span>
+			</div>
+		);
 	} else {
 		input = (
 			<input

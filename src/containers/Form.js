@@ -86,7 +86,9 @@ class Form extends Component {
 				validation: {
 					required: true,
 					valid: false,
-					touched: false
+					touched: false,
+					counter: 0,
+					counterMax: 10
 				}
 			}
 		},
@@ -101,7 +103,13 @@ class Form extends Component {
 
 		if (validation.required && newValue.length === 0) {
 			console.log("here");
-			out = false;
+			out = out && false;
+		}
+
+		if (this.state.form[name].type === "textarea") {
+			if (newValue.length > this.state.form[name].validation.counterMax) {
+				out = out && false;
+			}
 		}
 
 		return out;
@@ -123,6 +131,11 @@ class Form extends Component {
 		const checkFormValidation = this.checkFormValidation(name, inputValidationStatus);
 
 		this.setState(prevState => {
+			let nameValidation;
+			if (this.state.form[name].type === "textarea") {
+				nameValidation = { counter: newValue.length };
+			}
+
 			return {
 				...prevState,
 				form: {
@@ -133,7 +146,8 @@ class Form extends Component {
 						validation: {
 							...prevState.form[name].validation,
 							touched: true,
-							valid: inputValidationStatus
+							valid: inputValidationStatus,
+							...nameValidation
 						}
 					}
 				},
@@ -158,13 +172,14 @@ class Form extends Component {
 	render() {
 		const validForm = this.state.formValidation.valid;
 		const inputs = this.generateInputs();
-		// <Input data={form.firstname} onChangeHandler={this.onChangeHandler(form.firstname.name)} />
 
 		return (
 			<div>
 				<h1>Form</h1>
-				{inputs}
-				<Submitbtn validForm={validForm} />
+				<form>
+					{inputs}
+					<Submitbtn validForm={validForm} />
+				</form>
 			</div>
 		);
 	}
