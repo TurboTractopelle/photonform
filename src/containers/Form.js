@@ -95,7 +95,7 @@ class Form extends Component {
 			}
 		},
 		formValidation: {
-			valid: false
+			valid: true //false
 		},
 		formSubmission: false
 	};
@@ -180,7 +180,8 @@ class Form extends Component {
 		return bodyFormData;
 	};
 
-	onSubmitHandler = () => {
+	onSubmitHandler = e => {
+		e.preventDefault();
 		const bodyFormData = this.getFormData();
 		axios
 			.post("http://localhost/joomla25/components/com_content/test.php", bodyFormData)
