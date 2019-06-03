@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Input from "../components/Input";
 import Submitbtn from "../components/Submitbtn";
+import axios from "axios";
 
 class Form extends Component {
 	state = {
@@ -169,6 +170,16 @@ class Form extends Component {
 		));
 	};
 
+	onSubmitHandler = () => {
+		console.log("gg");
+		axios
+			.post(
+				"http://photon-ext.edpsciences.org/components/com_accueil/views/accueil/tmpl/test.php?name=value"
+			)
+			.then(res => console.log(res))
+			.catch(err => console.log(err));
+	};
+
 	render() {
 		const validForm = this.state.formValidation.valid;
 		const inputs = this.generateInputs();
@@ -176,7 +187,8 @@ class Form extends Component {
 		return (
 			<div>
 				<h1>Form</h1>
-				<form>
+				<button onClick={this.onSubmitHandler}>submit test</button>
+				<form onSubmit={this.onSubmitHandler}>
 					{inputs}
 					<Submitbtn validForm={validForm} />
 				</form>
