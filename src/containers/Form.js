@@ -103,7 +103,6 @@ class Form extends Component {
 		let out = true;
 
 		if (validation.required && newValue.length === 0) {
-			console.log("here");
 			out = out && false;
 		}
 
@@ -173,9 +172,7 @@ class Form extends Component {
 	onSubmitHandler = () => {
 		console.log("gg");
 		axios
-			.post(
-				"http://photon-ext.edpsciences.org/components/com_accueil/views/accueil/tmpl/test.php?name=value"
-			)
+			.post("http://localhost/joomla25/components/com_content/test.php?name=value")
 			.then(res => console.log(res))
 			.catch(err => console.log(err));
 	};
@@ -185,7 +182,7 @@ class Form extends Component {
 		const inputs = this.generateInputs();
 
 		return (
-			<div>
+			<div datatest="formWrapper">
 				<h1>Form</h1>
 				<button onClick={this.onSubmitHandler}>submit test</button>
 				<form onSubmit={this.onSubmitHandler}>

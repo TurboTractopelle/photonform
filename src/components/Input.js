@@ -26,13 +26,13 @@ const Input = props => {
 				value={props.data.value}
 				placeholder={props.data.placeholder}
 				onChange={props.onChangeHandler}
-				dataTest="input"
+				datatest="input"
 			/>
 		);
 	}
 
 	return (
-		<div className={["item", props.data.title, valid].join(" ")} dataTest="inputWrapper">
+		<div className={["item", props.data.title, valid].join(" ")} datatest="inputWrapper">
 			<label htmlFor={props.data.title}>
 				{props.data.title}
 				{required}:{" "}
