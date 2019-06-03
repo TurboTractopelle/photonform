@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Input from "../components/Input";
 import Submitbtn from "../components/Submitbtn";
+import Posted from "../components/Posted";
 import axios from "axios";
 
 class Form extends Component {
@@ -95,7 +96,8 @@ class Form extends Component {
 		},
 		formValidation: {
 			valid: false
-		}
+		},
+		formSubmission: false
 	};
 
 	inputValidation = (name, newValue) => {
@@ -169,28 +171,40 @@ class Form extends Component {
 		));
 	};
 
+	getFormData = () => {
+		let bodyFormData = new FormData();
+		let keys = Object.keys(this.state.form);
+		for (let i = 0; i < keys.length; i++) {
+			bodyFormData.set(this.state.form[keys[i]].name, this.state.form[keys[i]].value);
+		}
+		return bodyFormData;
+	};
+
 	onSubmitHandler = () => {
-		console.log("gg");
+		const bodyFormData = this.getFormData();
 		axios
-			.post("http://localhost/joomla25/components/com_content/test.php?name=value")
-			.then(res => console.log(res))
+			.post("http://localhost/joomla25/components/com_content/test.php", bodyFormData)
+			.then(res => this.setState(prevState => ({ ...prevState, formSubmission: true })))
 			.catch(err => console.log(err));
 	};
 
 	render() {
+		// <button onClick={this.onSubmitHandler}>submit test</button>
 		const validForm = this.state.formValidation.valid;
 		const inputs = this.generateInputs();
-
-		return (
-			<div datatest="formWrapper">
+		const formDisplay = this.state.formSubmission ? (
+			<Posted />
+		) : (
+			<div>
 				<h1>Form</h1>
-				<button onClick={this.onSubmitHandler}>submit test</button>
-				<form onSubmit={this.onSubmitHandler}>
+				<form>
 					{inputs}
-					<Submitbtn validForm={validForm} />
+					<Submitbtn validForm={validForm} onSubmitHandler={this.onSubmitHandler} />
 				</form>
 			</div>
 		);
+
+		return <div datatest="formWrapper">{formDisplay}</div>;
 	}
 }
 
