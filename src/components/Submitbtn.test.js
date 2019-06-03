@@ -1,6 +1,6 @@
 import React from "react";
 import Submitbtn from "./Submitbtn";
-import { shallow, mount, render } from "enzyme";
+import { shallow } from "enzyme";
 import { findByProp } from "../tests/utils";
 
 describe("Submit btn", () => {
