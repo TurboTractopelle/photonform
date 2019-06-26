@@ -38,8 +38,8 @@ class Form extends Component {
         value: "",
         placeholder: "Enter your phone number",
         validation: {
-          required: true,
-          valid: false,
+          required: false,
+          valid: true,
           touched: false
         }
       },
@@ -62,8 +62,8 @@ class Form extends Component {
         value: "",
         placeholder: "Enter your company",
         validation: {
-          required: true,
-          valid: false,
+          required: false,
+          valid: true,
           touched: false
         }
       },
@@ -74,8 +74,8 @@ class Form extends Component {
         value: "",
         placeholder: "Select your country",
         validation: {
-          required: true,
-          valid: false,
+          required: false,
+          valid: true,
           touched: false
         }
       },
@@ -90,7 +90,7 @@ class Form extends Component {
           valid: false,
           touched: false,
           counter: 0,
-          counterMax: 10
+          counterMax: 255
         }
       }
     },
@@ -182,6 +182,8 @@ class Form extends Component {
         this.state.form[keys[i]].name,
         this.state.form[keys[i]].value
       );
+      bodyFormData.set("p_company", this.props.company);
+      bodyFormData.set("p_name", this.props.product);
     }
     return bodyFormData;
   };
@@ -191,7 +193,7 @@ class Form extends Component {
     const bodyFormData = this.getFormData();
     axios
       .post(
-        "http://photon-ext.edpsciences.org/components/com_contactrequest/test.php",
+        "http://photon-ext.edpsciences.org/index.php?option=com_contactrequest&task=gg",
         bodyFormData
       )
       .then(res =>
