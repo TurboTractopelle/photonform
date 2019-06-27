@@ -1,4 +1,5 @@
 import React from "react";
+import SelectCountry from "./SelectCountry";
 
 const Input = props => {
 	const required = props.data.validation.required && <span className="required">*</span>;
@@ -18,6 +19,8 @@ const Input = props => {
 				</span>
 			</div>
 		);
+	} else if (props.data.type === "select" && props.data.title === "Country") {
+		input = <SelectCountry tops={props.data.special.tops} placeholder={props.data.placeholder} />;
 	} else {
 		input = (
 			<input
