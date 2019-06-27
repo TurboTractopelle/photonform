@@ -135,7 +135,6 @@ class Form extends Component {
 		const inputValidationStatus = this.inputValidation(name, newValue);
 		const checkFormValidation = this.checkFormValidation(name, inputValidationStatus);
 
-		console.log(newValue);
 		this.setState(prevState => {
 			let nameValidation;
 			if (this.state.form[name].type === "textarea") {
