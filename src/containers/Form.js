@@ -190,21 +190,30 @@ class Form extends Component {
 		const bodyFormData = this.getFormData();
 		axios
 			.post(
-				"http://photon-ext.edpsciences.org/index.php?option=com_contactrequest&task=gg",
+				"http://photon-ext.edpsciences.org/index.php?option=com_contactrequest&task=submit",
 				bodyFormData
 			)
-			.then(res => this.setState(prevState => ({ ...prevState, formSubmission: true })))
+			.then(res => {
+				// eslint-disable-next-line no-undef
+				_gaq.push([
+					"t2._trackEvent",
+					"contactRequest",
+					"",
+					`${this.props.company} - ${this.props.product}`
+				]);
+				this.setState(prevState => ({ ...prevState, formSubmission: true }));
+			})
 			.catch(err => console.log(err));
 	};
 
 	render() {
-		// <button onClick={this.onSubmitHandler}>submit test</button>
 		const validForm = this.state.formValidation.valid;
 		const inputs = this.generateInputs();
 		const formDisplay = this.state.formSubmission ? (
 			<Posted />
 		) : (
 			<div>
+				<h2>Request info about this product</h2>
 				<form>
 					<p>
 						<b>Company:</b> {this.props.company}
