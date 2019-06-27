@@ -4,7 +4,9 @@ const Posted = props => {
 	return (
 		<div className="msg msg-info">
 			<span className="ico ico-info" />
-			<div>Your message has been sent.</div>
+			<div>
+				<p>Your message has been sent.</p>
+			</div>
 		</div>
 	);
 };

@@ -205,7 +205,6 @@ class Form extends Component {
 			<Posted />
 		) : (
 			<div>
-				<h1>Form</h1>
 				<form>
 					<p>
 						<b>Company:</b> {this.props.company}
