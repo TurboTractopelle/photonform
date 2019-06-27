@@ -20,7 +20,14 @@ const Input = props => {
 			</div>
 		);
 	} else if (props.data.type === "select" && props.data.title === "Country") {
-		input = <SelectCountry tops={props.data.special.tops} placeholder={props.data.placeholder} />;
+		console.log(props.data.onChangeHandler);
+		input = (
+			<SelectCountry
+				tops={props.data.special.tops}
+				placeholder={props.data.placeholder}
+				onChangeHandler={props.onChangeHandler}
+			/>
+		);
 	} else {
 		input = (
 			<input

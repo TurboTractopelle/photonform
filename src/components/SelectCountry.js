@@ -23,7 +23,7 @@ const SelectCountry = props => {
 
 	return (
 		<div>
-			<select datatest="select">
+			<select datatest="select" onChange={props.onChangeHandler}>
 				{countries.map(c => (
 					<option key={c}>{c}</option>
 				))}
